@@ -20,7 +20,7 @@ export const projectsConfig = {
       title: 'Medrecord (simple e-clinic application)',
       description:
         'simple e-clinic application website to support work in a clinic, built with Next.js, TypeScript, and Tailwind CSS. It features a responsive design, user authentication, and a dashboard for managing patient records.',
-      thumbnail: '/assets/medrecord.svg',
+      thumbnail: '/assets/Medrecord.svg',
       tags: ['Next.js', 'TypeScript', 'API', 'Dashboard'],
       url: 'https://medrecord.vercel.app',
       featured: true,

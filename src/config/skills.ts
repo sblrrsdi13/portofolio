@@ -23,7 +23,7 @@ export const skillsConfig = {
       name: 'Luau',
       description: 'Roblox gameplay systems, reusable modules, and live game services.',
       icon: {
-        src: '/assets/skills/luau.svg',
+        src: '/assets/skills/Luau.svg',
         alt: 'Luau logo',
       },
     },

@@ -1,12 +1,12 @@
 export const siteConfig = {
-  name: 'portofolio',
+  name: 'portfolio',
   brand: {
     logo: {
       src: '/assets/profile_head.png',
       alt: 'Portfolio logo',
     },
   },
-  title: 'Junior developer & Roblox Game Developer',
+  title: 'sabilarrusdi',
   description:
     'I create Roblox experiences, game systems, UI frameworks, and simple web applications.',
   url: 'https://nestleee.dev',
