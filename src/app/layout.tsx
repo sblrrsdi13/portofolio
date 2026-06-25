@@ -20,6 +20,11 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  icons: {
+    icon: '/assets/profile_head.png',
+    shortcut: '/assets/profile_head.png',
+    apple: '/assets/profile_head.png',
+  },
   title: {
     default: `${siteConfig.name} | ${siteConfig.title}`,
     template: `%s | ${siteConfig.name}`,
