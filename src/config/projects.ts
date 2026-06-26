@@ -17,6 +17,23 @@ export const projectsConfig: ProjectsConfig = {
   openLabel: 'Open',
   projects: [
     {
+      slug: 'portofolio',
+      title: 'Personal Portfolio Website',
+      description:
+        'A modern personal portfolio website built with Next.js, React, TypeScript, and Node.js to showcase projects, skills, and professional experience.',
+      detailDescription:
+        'This portfolio website is developed using Next.js App Router, React for dynamic UI components, TypeScript for type-safe development, and Node.js for backend support. It features a clean, responsive design to present projects, technical skills, and professional background in an engaging way.',
+      thumbnail: '/assets/Portofolio.png',
+      tags: ['Next.js', 'TypeScript', 'React', 'node.js', 'Tailwind CSS'],
+      url: 'https://portofolio-sabilarrusdi.vercel.app',
+      features: [
+        'project showcase',
+        'responsive layout',
+        'Next.js and TypeScript implementation',
+      ],
+      featured: true,
+    },
+    {
       slug: 'gg-ignite',
       title: 'GG Ignite (Roblox experience)',
       description:
@@ -41,7 +58,7 @@ export const projectsConfig: ProjectsConfig = {
       detailDescription:
         'Medrecord is a simple e-clinic web application designed to support clinic workflows through patient record management, responsive dashboard screens, and practical web app architecture.',
       thumbnail: '/assets/Medrecord.svg',
-      tags: ['Next.js', 'TypeScript', 'API', 'Dashboard'],
+      tags: ['Next.js', 'TypeScript', 'API', 'Dashboard', 'Tailwind CSS', 'postgreSQL', 'Prisma'],
       url: 'https://medrecord.vercel.app',
       features: [
         'Responsive dashboard interface',
