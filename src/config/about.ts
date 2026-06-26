@@ -11,5 +11,10 @@ export const aboutConfig = {
     label: 'Learn More',
     href: '#experience',
   },
+  cvButton: {
+    label: 'Download CV',
+    href: '/assets/Sabilarrusdi-CV.pdf',
+    filename: 'Sabilarrusdi-CV.pdf',
+  },
   highlights: ['Game systems', 'UI frameworks', 'Web applications'],
 };

@@ -9,7 +9,7 @@ export const heroConfig = {
     alt: '3D character illustration of Nestleee',
   },
   buttons: [
-    { label: 'View Projects', href: '#projects', variant: 'primary' },
+    { label: 'View Portofolio', href: '#portfolio', variant: 'primary' },
     { label: 'Contact Me', href: '#contact', variant: 'secondary' },
   ],
   followLabel: 'Follow me on',

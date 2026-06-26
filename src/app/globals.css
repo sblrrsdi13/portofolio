@@ -26,7 +26,6 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
-  scroll-snap-type: y proximity;
   color-scheme: light;
 }
 
@@ -158,5 +157,11 @@ textarea {
 
   .floating-skill-icon {
     animation: none;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
   }
 }

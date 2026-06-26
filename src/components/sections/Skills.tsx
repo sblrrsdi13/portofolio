@@ -24,7 +24,7 @@ export function Skills() {
   return (
     <AnimatedSection id="skills">
       <Container>
-        <div className="relative min-h-[calc(100svh-7rem)] overflow-hidden px-3 py-10 sm:px-8 sm:py-14">
+        <div className="relative overflow-hidden px-3 py-10 sm:px-8 sm:py-14 md:min-h-[calc(100svh-7rem)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(66,88,214,0.14),transparent_24rem)]" />
           <div className="pointer-events-none absolute inset-0 hidden sm:block" aria-hidden="true">
             {skillsConfig.backgroundIcons.map((icon, index) => {
@@ -53,7 +53,7 @@ export function Skills() {
             })}
           </div>
 
-          <div className="relative flex min-h-[calc(100svh-14rem)] items-center justify-center">
+          <div className="relative flex items-center justify-center md:min-h-[calc(100svh-14rem)]">
             <Card className="mx-auto w-full max-w-2xl p-5 text-center shadow-slate-300/40 sm:p-7">
               <h2 className="text-2xl font-bold text-slate-950">{skillsConfig.sectionLabel}</h2>
               <p className="mt-1 text-sm text-slate-600">{skillsConfig.title}</p>

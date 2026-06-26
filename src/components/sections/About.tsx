@@ -31,13 +31,18 @@ export function About() {
                 {aboutConfig.description}
               </p>
 
-              <Button
-                href={aboutConfig.button.href}
-                variant="secondary"
-                className="mt-8"
-              >
-                {aboutConfig.button.label}
-              </Button>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button href={aboutConfig.button.href} variant="secondary">
+                  {aboutConfig.button.label}
+                </Button>
+                <Button
+                  href={aboutConfig.cvButton.href}
+                  variant="primary"
+                  download={aboutConfig.cvButton.filename}
+                >
+                  {aboutConfig.cvButton.label}
+                </Button>
+              </div>
             </div>
           </div>
         </div>

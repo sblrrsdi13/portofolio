@@ -19,7 +19,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="flex min-h-[calc(100svh-5rem)] scroll-mt-24 snap-start items-center px-4 py-4 sm:px-6 sm:py-6 lg:px-8"
+      className="scroll-mt-20 px-4 py-6 sm:px-6 sm:py-8 md:flex md:min-h-[calc(100svh-5rem)] md:snap-start md:items-center lg:px-8"
     >
       <Container className="glass relative min-h-[auto] overflow-hidden rounded-[1.75rem] px-6 py-8 sm:px-10 sm:py-10 lg:min-h-[520px] lg:px-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_52%_20%,rgba(99,102,241,0.13),transparent_26rem)]" />

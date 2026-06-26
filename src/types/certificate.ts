@@ -1,12 +1,12 @@
-export interface Project {
+export interface Certificate {
   slug: string;
   title: string;
+  issuer: string;
   description: string;
   detailDescription: string;
   thumbnail: string;
-  tags: string[];
+  issuedAt: string;
   url: string;
-  repositoryUrl?: string;
+  skills: string[];
   features: string[];
-  featured?: boolean;
 }

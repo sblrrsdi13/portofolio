@@ -16,10 +16,10 @@ export function AnimatedSection({ children, className, id }: AnimatedSectionProp
       id={id}
       initial={{ opacity: 0, y: 34, scale: 0.985 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: false, amount: 0.32, margin: '-80px' }}
+      viewport={{ once: true, amount: 0.22, margin: '-60px' }}
       transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        'flex min-h-[calc(100svh-5rem)] scroll-mt-24 snap-start items-center py-4 sm:py-6',
+        'scroll-mt-20 py-10 sm:py-12 md:flex md:min-h-[calc(100svh-5rem)] md:snap-start md:items-center md:py-6',
         className,
       )}
     >

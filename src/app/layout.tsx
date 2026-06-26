@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Footer } from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
+import { WelcomeScreen } from '@/components/layout/WelcomeScreen';
 import { siteConfig } from '@/config/site';
 import './globals.css';
 
@@ -136,6 +137,7 @@ export default function RootLayout({
           `}
         </Script>
         <div className="grid-pattern fixed inset-0 -z-10 opacity-80" />
+        <WelcomeScreen />
         <Navbar />
         {children}
         <Footer />

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/ui/Button';
@@ -44,6 +44,7 @@ function subscribeTheme(callback: () => void) {
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeHref, setActiveHref] = useState(siteConfig.nav[0]?.href ?? '#home');
+  const pendingNavRef = useRef<string | null>(null);
   const theme = useSyncExternalStore(
     subscribeTheme,
     getThemeSnapshot,
@@ -58,6 +59,7 @@ export function Navbar() {
   }
 
   function handleNavClick(href: string) {
+    pendingNavRef.current = href;
     setActiveHref(href);
     setMobileOpen(false);
   }
@@ -85,19 +87,15 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    let ticking = false;
+    let scrollIdleTimer: number | undefined;
 
-    function getNavOffset() {
-      const scrollPadding = Number.parseFloat(
-        getComputedStyle(document.documentElement).scrollPaddingTop,
-      );
-
-      return (Number.isFinite(scrollPadding) ? scrollPadding : 88) + 72;
-    }
+    const scrollPadding = Number.parseFloat(
+      getComputedStyle(document.documentElement).scrollPaddingTop,
+    );
+    const navOffset = (Number.isFinite(scrollPadding) ? scrollPadding : 88) + 72;
 
     function getActiveHref() {
       const sectionLinks = siteConfig.nav.filter((item) => item.href.startsWith('#'));
-      const navOffset = getNavOffset();
       let current = sectionLinks[0]?.href ?? '#home';
 
       for (const item of sectionLinks) {
@@ -115,35 +113,51 @@ export function Navbar() {
       return current;
     }
 
-    function updateActiveHref() {
-      setActiveHref(getActiveHref());
-      ticking = false;
+    function syncActiveHref(nextHref?: string) {
+      const next = nextHref ?? getActiveHref();
+      setActiveHref((prev) => (prev === next ? prev : next));
+    }
+
+    function finishNavScroll() {
+      const pendingHref = pendingNavRef.current;
+
+      if (pendingHref) {
+        pendingNavRef.current = null;
+        syncActiveHref(pendingHref);
+        return;
+      }
+
+      syncActiveHref();
     }
 
     function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(updateActiveHref);
-        ticking = true;
+      if (pendingNavRef.current) {
+        return;
       }
+
+      window.clearTimeout(scrollIdleTimer);
+      scrollIdleTimer = window.setTimeout(finishNavScroll, 120);
     }
 
     function onHashChange() {
       const hash = window.location.hash;
 
       if (hash && siteConfig.nav.some((item) => item.href === hash)) {
-        window.requestAnimationFrame(updateActiveHref);
+        pendingNavRef.current = hash;
+        syncActiveHref(hash);
       }
     }
 
-    updateActiveHref();
+    syncActiveHref();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('scrollend', updateActiveHref, { passive: true });
+    window.addEventListener('scrollend', finishNavScroll, { passive: true });
     window.addEventListener('hashchange', onHashChange);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('scrollend', updateActiveHref);
+      window.removeEventListener('scrollend', finishNavScroll);
       window.removeEventListener('hashchange', onHashChange);
+      window.clearTimeout(scrollIdleTimer);
     };
   }, []);
 

@@ -22,10 +22,15 @@ export const siteConfig = {
   nav: [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
+    { label: 'Portofolio', href: '#portfolio' },
     { label: 'Experience', href: '#experience' },
     { label: 'Contact', href: '#contact' },
   ],
   navCta: { label: 'Hire Me', href: '#contact' },
+  welcome: {
+    title: 'Welcome to my',
+    subtitle: 'Portfolio Website',
+    domain: 'Sabilarrusdi.dev',
+    durationMs: 2600,
+  },
 };
