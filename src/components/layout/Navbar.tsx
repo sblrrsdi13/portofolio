@@ -57,6 +57,11 @@ export function Navbar() {
     window.dispatchEvent(new Event(themeChangeEvent));
   }
 
+  function handleNavClick(href: string) {
+    setActiveHref(href);
+    setMobileOpen(false);
+  }
+
   useEffect(() => {
     function closeOnEscape(event: KeyboardEvent) {
       if (event.key === 'Escape') {
@@ -82,20 +87,28 @@ export function Navbar() {
   useEffect(() => {
     let ticking = false;
 
+    function getNavOffset() {
+      const scrollPadding = Number.parseFloat(
+        getComputedStyle(document.documentElement).scrollPaddingTop,
+      );
+
+      return (Number.isFinite(scrollPadding) ? scrollPadding : 88) + 72;
+    }
+
     function getActiveHref() {
       const sectionLinks = siteConfig.nav.filter((item) => item.href.startsWith('#'));
-      const scrollPosition = window.scrollY + 140;
+      const navOffset = getNavOffset();
       let current = sectionLinks[0]?.href ?? '#home';
 
       for (const item of sectionLinks) {
         const section = document.querySelector(item.href);
 
-        if (section instanceof HTMLElement && section.offsetTop <= scrollPosition) {
+        if (section instanceof HTMLElement && section.getBoundingClientRect().top <= navOffset) {
           current = item.href;
         }
       }
 
-      if (window.scrollY < 80) {
+      if (window.scrollY < 48) {
         current = sectionLinks[0]?.href ?? '#home';
       }
 
@@ -115,17 +128,21 @@ export function Navbar() {
     }
 
     function onHashChange() {
-      const hash = window.location.hash || '#';
-      setActiveHref(hash);
-      window.requestAnimationFrame(updateActiveHref);
+      const hash = window.location.hash;
+
+      if (hash && siteConfig.nav.some((item) => item.href === hash)) {
+        window.requestAnimationFrame(updateActiveHref);
+      }
     }
 
     updateActiveHref();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scrollend', updateActiveHref, { passive: true });
     window.addEventListener('hashchange', onHashChange);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scrollend', updateActiveHref);
       window.removeEventListener('hashchange', onHashChange);
     };
   }, []);
@@ -134,10 +151,10 @@ export function Navbar() {
     <header className="sticky top-2 z-50 px-3 sm:top-3">
       <Container className="glass relative grid h-14 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-[1.1rem] px-3 sm:h-16 sm:gap-3 sm:rounded-[1.35rem] sm:px-5">
         <a
-          href="#"
+          href={siteConfig.nav[0]?.href ?? '#home'}
           className="flex min-w-0 items-center gap-2 sm:gap-3"
           aria-label={`${siteConfig.name} home`}
-          onClick={() => setMobileOpen(false)}
+          onClick={() => handleNavClick(siteConfig.nav[0]?.href ?? '#home')}
         >
           <span className="grid size-10 shrink-0 place-items-center rounded-xl sm:size-11">
             <Image
@@ -168,7 +185,7 @@ export function Navbar() {
                   : 'text-slate-700 hover:bg-slate-100 hover:text-slate-950'
               }`}
               aria-current={activeHref === item.href ? 'page' : undefined}
-              onClick={() => setActiveHref(item.href)}
+              onClick={() => handleNavClick(item.href)}
             >
               {item.label}
             </a>
@@ -245,10 +262,7 @@ export function Navbar() {
                       : 'text-slate-700 hover:bg-white/70 hover:text-indigo-600'
                   }`}
                   aria-current={activeHref === item.href ? 'page' : undefined}
-                  onClick={() => {
-                    setActiveHref(item.href);
-                    setMobileOpen(false);
-                  }}
+                  onClick={() => handleNavClick(item.href)}
                 >
                   {item.label}
                 </a>
