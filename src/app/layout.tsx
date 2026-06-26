@@ -21,6 +21,9 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  verification: {
+    google: '_Al58ldUDthjf5p5RWvVYcLsjzPgLedJgOloAeq8Kh4',
+  },
   icons: {
     icon: '/assets/profile_head.png',
     shortcut: '/assets/profile_head.png',
