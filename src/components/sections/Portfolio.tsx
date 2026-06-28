@@ -104,50 +104,31 @@ export function Portfolio() {
 
 function ProjectsPanel() {
   const [showAll, setShowAll] = useState(false);
-  const visibleProjects = showAll
-    ? projectsConfig.projects
-    : projectsConfig.projects.slice(0, visibleLimit);
+  const visibleProjects = projectsConfig.projects.slice(0, visibleLimit);
+  const extraProjects = projectsConfig.projects.slice(visibleLimit);
   const hasMore = projectsConfig.projects.length > visibleLimit;
 
   return (
     <>
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {visibleProjects.map((project) => (
-          <article
-            key={project.title}
-            className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1"
-          >
-            <Image
-              src={project.thumbnail}
-              alt={project.title}
-              width={720}
-              height={420}
-              className="h-44 w-full rounded-2xl border border-slate-200 bg-white/60 object-cover"
-            />
-            <div className="p-1 pt-5">
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <Badge key={tag} className="border-slate-200 bg-slate-100 text-slate-700">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <h3 className="mt-4 text-xl font-bold text-slate-950">{project.title}</h3>
-              <p className="mt-3 min-h-20 text-sm leading-6 text-slate-600">
-                {project.description}
-              </p>
-              <div className="mt-5 flex justify-end">
-                <Link
-                  href={`/portfolio/projects/${project.slug}`}
-                  className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
-                >
-                  Details
-                  <ChevronRight className="size-4" aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-          </article>
+          <ProjectCard key={project.title} project={project} />
         ))}
+        <AnimatePresence initial={false}>
+          {showAll
+            ? extraProjects.map((project) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              ))
+            : null}
+        </AnimatePresence>
       </div>
       {hasMore ? (
         <div className="mt-8 flex justify-center">
@@ -156,11 +137,11 @@ function ProjectsPanel() {
             className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-5 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
             onClick={() => setShowAll((value) => !value)}
           >
+            {showAll ? 'View Less' : 'View More'}
             <ChevronDown
               className={`size-4 transition ${showAll ? 'rotate-180' : ''}`}
               aria-hidden="true"
             />
-            {showAll ? 'Show Less' : 'See More'}
           </button>
         </div>
       ) : null}
@@ -170,49 +151,31 @@ function ProjectsPanel() {
 
 function CertificatesPanel() {
   const [showAll, setShowAll] = useState(false);
-  const visibleCertificates = showAll
-    ? certificatesConfig.certificates
-    : certificatesConfig.certificates.slice(0, visibleLimit);
+  const visibleCertificates = certificatesConfig.certificates.slice(0, visibleLimit);
+  const extraCertificates = certificatesConfig.certificates.slice(visibleLimit);
   const hasMore = certificatesConfig.certificates.length > visibleLimit;
 
   return (
     <>
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {visibleCertificates.map((certificate) => (
-          <article
-            key={certificate.title}
-            className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1"
-          >
-            <Image
-              src={certificate.thumbnail}
-              alt={certificate.title}
-              width={720}
-              height={420}
-              className="h-48 w-full rounded-2xl border border-slate-200 bg-white/60 object-cover"
-            />
-            <div className="p-1 pt-5">
-              <div className="flex items-center justify-between gap-4">
-                <p className="text-sm font-semibold text-indigo-600">{certificate.issuer}</p>
-                <span className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs text-slate-600">
-                  {certificate.issuedAt}
-                </span>
-              </div>
-              <h3 className="mt-3 text-xl font-bold text-slate-950">{certificate.title}</h3>
-              <p className="mt-3 min-h-20 text-sm leading-6 text-slate-600">
-                {certificate.description}
-              </p>
-              <div className="mt-5 flex justify-end">
-                <Link
-                  href={`/portfolio/certificates/${certificate.slug}`}
-                  className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
-                >
-                  {certificatesConfig.detailLabel}
-                  <ChevronRight className="size-4" aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-          </article>
+          <CertificateCard key={certificate.title} certificate={certificate} />
         ))}
+        <AnimatePresence initial={false}>
+          {showAll
+            ? extraCertificates.map((certificate) => (
+                <motion.div
+                  key={certificate.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <CertificateCard certificate={certificate} />
+                </motion.div>
+              ))
+            : null}
+        </AnimatePresence>
       </div>
       {hasMore ? (
         <div className="mt-8 flex justify-center">
@@ -221,15 +184,86 @@ function CertificatesPanel() {
             className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-5 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
             onClick={() => setShowAll((value) => !value)}
           >
+            {showAll ? 'View Less' : 'View More'}
             <ChevronDown
               className={`size-4 transition ${showAll ? 'rotate-180' : ''}`}
               aria-hidden="true"
             />
-            {showAll ? 'Show Less' : 'See More'}
           </button>
         </div>
       ) : null}
     </>
+  );
+}
+
+function ProjectCard({ project }: { project: (typeof projectsConfig.projects)[number] }) {
+  return (
+    <article className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1">
+      <Image
+        src={project.thumbnail}
+        alt={project.title}
+        width={720}
+        height={420}
+        className="h-44 w-full rounded-2xl border border-slate-200 bg-white/60 object-cover"
+      />
+      <div className="p-1 pt-5">
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <Badge key={tag} className="border-slate-200 bg-slate-100 text-slate-700">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+        <h3 className="mt-4 text-xl font-bold text-slate-950">{project.title}</h3>
+        <p className="mt-3 min-h-20 text-sm leading-6 text-slate-600">{project.description}</p>
+        <div className="mt-5 flex justify-end">
+          <Link
+            href={`/portfolio/projects/${project.slug}`}
+            className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          >
+            Details
+            <ChevronRight className="size-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function CertificateCard({
+  certificate,
+}: {
+  certificate: (typeof certificatesConfig.certificates)[number];
+}) {
+  return (
+    <article className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1">
+      <Image
+        src={certificate.thumbnail}
+        alt={certificate.title}
+        width={720}
+        height={420}
+        className="h-48 w-full rounded-2xl border border-slate-200 bg-white/60 object-cover"
+      />
+      <div className="p-1 pt-5">
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-sm font-semibold text-indigo-600">{certificate.issuer}</p>
+          <span className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs text-slate-600">
+            {certificate.issuedAt}
+          </span>
+        </div>
+        <h3 className="mt-3 text-xl font-bold text-slate-950">{certificate.title}</h3>
+        <p className="mt-3 min-h-20 text-sm leading-6 text-slate-600">{certificate.description}</p>
+        <div className="mt-5 flex justify-end">
+          <Link
+            href={`/portfolio/certificates/${certificate.slug}`}
+            className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          >
+            {certificatesConfig.detailLabel}
+            <ChevronRight className="size-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 

@@ -23,7 +23,20 @@ export function Hero() {
     >
       <Container className="glass relative min-h-[auto] overflow-hidden rounded-[1.75rem] px-6 py-8 sm:px-10 sm:py-10 lg:min-h-[520px] lg:px-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_52%_20%,rgba(99,102,241,0.13),transparent_26rem)]" />
-        <div className="relative grid min-h-[440px] items-center gap-8 lg:grid-cols-[0.9fr_1.05fr_0.8fr]">
+
+        <div className="absolute inset-0 lg:hidden">
+          <Image
+            src={heroConfig.avatar.src}
+            alt={heroConfig.avatar.alt}
+            fill
+            priority
+            className="object-contain object-center opacity-[0.16] dark:opacity-[0.11]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(238,242,248,0.34)_0%,rgba(247,249,253,0.7)_58%,rgba(247,249,253,0.92)_100%)] dark:bg-[linear-gradient(180deg,rgba(5,8,22,0.14)_0%,rgba(5,8,22,0.42)_58%,rgba(5,8,22,0.82)_100%)]" />
+        </div>
+
+        <div className="relative grid min-h-[560px] items-center gap-8 lg:min-h-[440px] lg:grid-cols-[0.9fr_1.05fr_0.8fr]">
           <div className="z-10 max-w-xl">
             <h1 className="text-4xl font-extrabold tracking-normal text-slate-950 sm:text-6xl lg:text-7xl">
               {heroConfig.greeting}{' '}
@@ -53,7 +66,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative order-first mx-auto h-[200px] w-full max-w-[280px] sm:h-[260px] sm:max-w-[340px] md:h-[300px] md:max-w-[380px] lg:order-none lg:h-[470px] lg:max-w-none">
+          <div className="relative order-first mx-auto hidden h-[200px] w-full max-w-[280px] sm:h-[260px] sm:max-w-[340px] lg:order-none lg:block lg:h-[470px] lg:max-w-none">
             <Image
               src={heroConfig.avatar.src}
               alt={heroConfig.avatar.alt}

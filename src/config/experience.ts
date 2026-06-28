@@ -14,6 +14,7 @@ export const experienceConfig = {
         'Developing and maintaining a Roblox nightclub experience featuring immersive environments, interactive gameplay systems, visual effects, and optimized multiplayer performance.',
       highlights: [
         'Luau scripting',
+        'modular script architecture',
         'Roblox Studio Solo development',
         'Nightclub gameplay systems',
         'Interactive UI & UX',
