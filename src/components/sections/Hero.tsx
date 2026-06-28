@@ -77,7 +77,7 @@ export function Hero() {
             />
           </div>
 
-          <Card className="z-10 ml-auto w-full max-w-[260px] p-4 sm:max-w-sm sm:p-5" lift={false}>
+          <Card className="z-10 mx-auto w-full max-w-[260px] p-4 sm:max-w-sm sm:p-5" lift={false}>
             <div className="space-y-1">
               {statsConfig.map((stat) => {
                 const Icon = statIcons[stat.icon];
