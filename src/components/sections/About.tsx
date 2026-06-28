@@ -32,7 +32,7 @@ export function About() {
                   className="object-contain object-center opacity-[0.16] dark:opacity-[0.11]"
                   sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.34)_0%,rgba(245,247,252,0.72)_55%,rgba(245,247,252,0.94)_100%)] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.12)_0%,rgba(15,23,42,0.42)_55%,rgba(15,23,42,0.82)_100%)]" />
+                <div className="absolute inset-0 " />
               </div>
 
               <div className="relative z-10 flex min-h-[480px] flex-col justify-end lg:block lg:min-h-0">

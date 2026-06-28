@@ -33,7 +33,7 @@ export function Hero() {
             className="object-contain object-center opacity-[0.16] dark:opacity-[0.11]"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(238,242,248,0.34)_0%,rgba(247,249,253,0.7)_58%,rgba(247,249,253,0.92)_100%)] dark:bg-[linear-gradient(180deg,rgba(5,8,22,0.14)_0%,rgba(5,8,22,0.42)_58%,rgba(5,8,22,0.82)_100%)]" />
+          <div className="absolute inset-0 " />
         </div>
 
         <div className="relative grid min-h-[560px] items-center gap-8 lg:min-h-[440px] lg:grid-cols-[0.9fr_1.05fr_0.8fr]">
@@ -77,7 +77,7 @@ export function Hero() {
             />
           </div>
 
-          <Card className="z-10 mx-auto w-full max-w-[260px] p-4 sm:max-w-sm sm:p-5" lift={false}>
+          <div className="">
             <div className="space-y-1">
               {statsConfig.map((stat) => {
                 const Icon = statIcons[stat.icon];
@@ -85,7 +85,7 @@ export function Hero() {
                 return (
                   <div
                     key={stat.label}
-                    className="flex items-center gap-4 border-b border-slate-200/80 px-1 py-4 last:border-b-0"
+                    className="flex items-center gap-4 border-slate-200/80 px-1 py-4 last:border-b-0"
                   >
                     <span className="grid size-9 place-items-center rounded-xl bg-slate-100 text-slate-950">
                       <Icon className="size-4" aria-hidden="true" />
@@ -102,7 +102,7 @@ export function Hero() {
                 );
               })}
             </div>
-          </Card>
+          </div>
         </div>
       </Container>
     </section>
