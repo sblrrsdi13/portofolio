@@ -108,7 +108,7 @@ export default async function PortfolioDetailPage({ params }: DetailPageProps) {
               {item.url ? (
                 <a
                   href={item.url}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold text-slate-50! shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
                   aria-label={`Open ${item.title}`}
                 >
                   <ExternalLink className="size-4" aria-hidden="true" />

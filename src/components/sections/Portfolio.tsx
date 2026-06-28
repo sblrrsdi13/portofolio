@@ -45,8 +45,8 @@ export function Portfolio() {
   return (
     <AnimatedSection id="portfolio">
       <Container>
-        <div className="relative mx-auto w-full max-w-7xl overflow-hidden px-2 py-10 sm:px-4 lg:px-6">
-          <div className="absolute left-1/2 top-1/2 size-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400/10 blur-3xl" />
+        <div className="relative mx-auto w-full max-w-7xl overflow-hidden px-2 py-10 sm:px-4 lg:px-6 lg:-mt-42">
+          <div className="absolute left-1/2 top-1/2 size-136anslate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400/10 blur-3xl" />
 
           <div className="relative mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-black tracking-normal text-slate-950 sm:text-5xl">
@@ -57,7 +57,7 @@ export function Portfolio() {
             </p>
           </div>
 
-          <div className="glass relative mx-auto mt-9 grid max-w-3xl grid-cols-1 gap-2 rounded-[1.35rem] p-2 sm:grid-cols-3">
+          <div className="glass relative mx-auto mt-9 flex max-w-3xl gap-2 overflow-x-auto rounded-[1.35rem] p-2 sm:grid sm:max-w-none sm:grid-cols-3 sm:overflow-visible">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -66,7 +66,7 @@ export function Portfolio() {
                 <button
                   key={tab.id}
                   type="button"
-                  className={`flex min-h-12 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-indigo-300 ${
+                  className={`flex min-h-12 items-center justify-center gap-2 rounded-2xl px-4 text-sm font-semibold transition whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-300 ${
                     isActive
                       ? 'bg-white text-indigo-600 shadow-sm shadow-slate-200/60'
                       : 'text-slate-500 hover:bg-white/55 hover:text-slate-950'
@@ -112,19 +112,19 @@ function ProjectsPanel() {
     <>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {visibleProjects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
+          <ProjectCard key={project.slug} project={project} />
         ))}
         <AnimatePresence initial={false}>
           {showAll
             ? extraProjects.map((project) => (
                 <motion.div
-                  key={project.title}
+                  key={project.slug}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <ProjectCard project={project} />
+                  <ProjectCard key={project.slug} project={project} />
                 </motion.div>
               ))
             : null}
@@ -134,7 +134,7 @@ function ProjectsPanel() {
         <div className="mt-8 flex justify-center">
           <button
             type="button"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-5 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-5 text-sm font-semibold text-slate-50! shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
             onClick={() => setShowAll((value) => !value)}
           >
             {showAll ? 'View Less' : 'View More'}
@@ -181,7 +181,7 @@ function CertificatesPanel() {
         <div className="mt-8 flex justify-center">
           <button
             type="button"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-5 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#151923] px-5 text-sm font-semibold text-slate-50! shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
             onClick={() => setShowAll((value) => !value)}
           >
             {showAll ? 'View Less' : 'View More'}
@@ -198,7 +198,7 @@ function CertificatesPanel() {
 
 function ProjectCard({ project }: { project: (typeof projectsConfig.projects)[number] }) {
   return (
-    <article className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1">
+    <article className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1 flex h-full flex-col">
       <Image
         src={project.thumbnail}
         alt={project.title}
@@ -206,7 +206,7 @@ function ProjectCard({ project }: { project: (typeof projectsConfig.projects)[nu
         height={420}
         className="h-44 w-full rounded-2xl border border-slate-200 bg-white/60 object-cover"
       />
-      <div className="p-1 pt-5">
+      <div className="p-1 pt-5 flex flex-col flex-1">
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <Badge key={tag} className="border-slate-200 bg-slate-100 text-slate-700">
@@ -219,7 +219,7 @@ function ProjectCard({ project }: { project: (typeof projectsConfig.projects)[nu
         <div className="mt-5 flex justify-end">
           <Link
             href={`/portfolio/projects/${project.slug}`}
-            className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold text-slate-50! shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
           >
             Details
             <ChevronRight className="size-4" aria-hidden="true" />
@@ -236,7 +236,7 @@ function CertificateCard({
   certificate: (typeof certificatesConfig.certificates)[number];
 }) {
   return (
-    <article className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1">
+    <article className="glass rounded-[1.35rem] p-4 transition hover:-translate-y-1 flex h-full flex-col">
       <Image
         src={certificate.thumbnail}
         alt={certificate.title}
@@ -244,7 +244,7 @@ function CertificateCard({
         height={420}
         className="h-48 w-full rounded-2xl border border-slate-200 bg-white/60 object-cover"
       />
-      <div className="p-1 pt-5">
+      <div className="p-1 pt-5 flex flex-col flex-1">
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold text-indigo-600">{certificate.issuer}</p>
           <span className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs text-slate-600">
@@ -256,7 +256,7 @@ function CertificateCard({
         <div className="mt-5 flex justify-end">
           <Link
             href={`/portfolio/certificates/${certificate.slug}`}
-            className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold !text-slate-50 shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#151923] px-4 text-sm font-semibold text-slate-50! shadow-lg shadow-slate-300/60 transition hover:bg-[#252b38] focus:outline-none focus:ring-2 focus:ring-indigo-300"
           >
             {certificatesConfig.detailLabel}
             <ChevronRight className="size-4" aria-hidden="true" />

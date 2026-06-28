@@ -40,6 +40,7 @@ export function Projects() {
                   width={720}
                   height={420}
                   className="h-44 w-full object-cover"
+                  priority={project.slug === 'portofolio'}
                 />
                 <div className="p-5">
                   <div className="flex flex-wrap gap-2">

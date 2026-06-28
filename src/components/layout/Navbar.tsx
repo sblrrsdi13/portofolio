@@ -180,7 +180,7 @@ export function Navbar() {
               priority
             />
           </span>
-          <span className="max-w-[6.5rem] truncate text-sm font-bold tracking-normal text-slate-950 min-[360px]:max-w-[9rem] min-[360px]:text-base lg:max-w-none">
+          <span className="max-w-26 truncate text-sm font-bold tracking-normal text-slate-950 min-[360px]:max-w-36 min-[360px]:text-base lg:max-w-none">
             {siteConfig.name}
           </span>
         </a>

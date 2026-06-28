@@ -3,7 +3,6 @@ import { BriefcaseBusiness, CheckCircle2, Folder, Users } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
 import { SocialLinks } from '@/components/ui/SocialLinks';
 import { heroConfig } from '@/config/hero';
 import { statsConfig } from '@/config/stats';
@@ -21,7 +20,7 @@ export function Hero() {
       id="home"
       className="scroll-mt-20 px-4 py-6 sm:px-6 sm:py-8 md:flex md:min-h-[calc(100svh-5rem)] md:snap-start md:items-center lg:px-8"
     >
-      <Container className="glass relative min-h-[auto] overflow-hidden rounded-[1.75rem] px-6 py-8 sm:px-10 sm:py-10 lg:min-h-[520px] lg:px-20">
+      <Container className="glass relative min-h-auto overflow-hidden rounded-[1.75rem] px-6 py-8 sm:px-10 sm:py-10 lg:min-h-130 lg:px-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_52%_20%,rgba(99,102,241,0.13),transparent_26rem)]" />
 
         <div className="absolute inset-0 lg:hidden">
@@ -36,7 +35,7 @@ export function Hero() {
           <div className="absolute inset-0 " />
         </div>
 
-        <div className="relative grid min-h-[560px] items-center gap-8 lg:min-h-[440px] lg:grid-cols-[0.9fr_1.05fr_0.8fr]">
+        <div className="relative grid min-h-140 items-center gap-8 lg:min-h-110 lg:grid-cols-[0.9fr_1.05fr_0.8fr]">
           <div className="z-10 max-w-xl">
             <h1 className="text-4xl font-extrabold tracking-normal text-slate-950 sm:text-6xl lg:text-7xl">
               {heroConfig.greeting}{' '}
@@ -48,13 +47,13 @@ export function Hero() {
             <p className="mt-5 max-w-lg text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
               {heroConfig.description}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-row flex-wrap items-center gap-3">
               {heroConfig.buttons.map((button) => (
                 <Button
                   key={button.href}
                   href={button.href}
                   variant={button.variant}
-                  className="w-full sm:w-auto"
+                  className="w-auto"
                 >
                   {button.label}
                 </Button>
@@ -66,7 +65,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative order-first mx-auto hidden h-[200px] w-full max-w-[280px] sm:h-[260px] sm:max-w-[340px] lg:order-none lg:block lg:h-[470px] lg:max-w-none">
+          <div className="relative order-first mx-auto hidden h-50 w-full max-w-70 sm:h-65 sm:max-w-85 lg:order-0 lg:block lg:h-117.5 lg:max-w-none">
             <Image
               src={heroConfig.avatar.src}
               alt={heroConfig.avatar.alt}
